@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: config-ms
+    name: confg-ms
 
   datasource:
     # Dentro del docker-compose, el host correcto es "postgres"
