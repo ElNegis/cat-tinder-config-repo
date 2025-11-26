@@ -1,6 +1,57 @@
 server:
-  port: 8085
+  port: 18083
+  forward-headers-strategy: framework
+  error:
+    include-message: always
+    include-binding-errors: always
 
 spring:
   application:
-    name: confg-ms
+    name: config-ms
+
+  datasource:
+    # Dentro del docker-compose, el host correcto es "postgres"
+    url: jdbc:postgresql://postgres:5432/review-db
+    username: admin
+    password: "{cipher}b4886e7a3b512351e2ee28a530d0b3873accb8c0a3b719dd1291481d0e516e6e"
+    hikari:
+      initialization-fail-timeout: 60000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: config-ms
+    non-secure-port: ${server.port}
+    instance-id: ${spring.application.name}:${server.port}
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      # Dentro de docker-compose el hostname es "eureka"
+      defaultZone: http://eureka:8762/eureka/
+    registryFetchIntervalSeconds: 5
+    initialInstanceInfoReplicationIntervalSeconds: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
