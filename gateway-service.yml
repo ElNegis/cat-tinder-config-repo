@@ -1,0 +1,16 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=X-Gateway, OK
+
+      routes:
+        - id: swipe-service
+          uri: lb://SWIPE-SERVICE
+          predicates:
+            - Path=/swipe-service/**
+          filters:
+            - StripPrefix=1
