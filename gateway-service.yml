@@ -12,18 +12,18 @@ spring:
 
       routes:
         # ==== API del Swipe Service ====
-        - id: swipe-service
+        - id: swipe-service.yml
           uri: lb://SWIPE-SERVICE
           predicates:
-            - Path=/swipe-service/**
+            - Path=/swipe-service.yml/**
           filters:
             - StripPrefix=1
 
         # ==== OpenAPI/Swagger del SwipeService (proxy) ====
-        - id: swipe-service-openapi
+        - id: swipe-service.yml-openapi
           uri: lb://SWIPE-SERVICE
           predicates:
-            - Path=/swipe-service/v3/api-docs/**, /swipe-service/swagger-ui.html, /swipe-service/swagger-ui/**, /swipe-service/webjars/**, /swipe-service/swagger-resources/**
+            - Path=/swipe-service.yml/v3/api-docs/**, /swipe-service.yml/swagger-ui.html, /swipe-service.yml/swagger-ui/**, /swipe-service.yml/webjars/**, /swipe-service.yml/swagger-resources/**
           filters:
             - StripPrefix=1
 
@@ -73,7 +73,7 @@ springdoc:
   swagger-ui:
     urls:
       - name: SwipeService
-        url: /swipe-service/v3/api-docs
+        url: /swipe-service.yml/v3/api-docs
       - name: ConfigMS
         url: /confg-ms/v3/api-docs
     disable-swagger-default-url: true

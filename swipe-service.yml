@@ -1,5 +1,5 @@
 server:
-  port: 18083
+  port: 8081
   forward-headers-strategy: framework
   error:
     include-message: always
@@ -7,14 +7,12 @@ server:
 
 spring:
   application:
-    name: confg-ms
+    name: swipe-service
 
   datasource:
-    url: jdbc:postgresql://postgres:5432/review-db
+    url: jdbc:postgresql://localhost:5433/review-db
     username: admin
-    password: "{cipher}4499b3ad927a8a8f157134c8ee825cbc33530e79ffa23268c302acb7f71fae1f"
-    hikari:
-      initialization-fail-timeout: 60000
+    password: "{cipher}b4886e7a3b512351e2ee28a530d0b3873accb8c0a3b719dd1291481d0e516e6e"
 
   jpa:
     hibernate:
@@ -32,15 +30,14 @@ springdoc:
 eureka:
   instance:
     preferIpAddress: true
-    hostname: config-ms
+    hostname: localhost
     non-secure-port: ${server.port}
     instance-id: ${spring.application.name}:${server.port}
-
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka:8762/eureka/
+      defaultZone: http://localhost:8762/eureka/
     registryFetchIntervalSeconds: 5
     initialInstanceInfoReplicationIntervalSeconds: 5
 
