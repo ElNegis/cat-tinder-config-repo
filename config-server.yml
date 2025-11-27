@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: confg-ms
+    name: config-server
 
   datasource:
     url: jdbc:postgresql://postgres:5432/review-db
